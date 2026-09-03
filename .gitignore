@@ -1,0 +1,22 @@
+# Operational backups and target-host evidence are never published.
+06_PHASE2_BACKUP/
+06_PHASE3_BACKUP/
+06_PHASE4_BACKUP/
+06_REPAIR_BACKUP/
+06_DEPLOYMENT_BACKUP/
+
+# Local execution diagnostics.
+09-03-elevated-run*.log
+*.stdout.log
+*.stderr.log
+
+# The release ZIP is tracked; its expanded staging copy is local-only.
+07_RELEASE/09-03-DigiVista-Secure-Vault-Release/
+
+# Received legacy scripts are retained locally as evidence but excluded from
+# the maintained release because they do not meet the current safety policy.
+02_DEPLOYMENT/Deploy-DigiVista-Final-Approved-UI.ps1
+02_DEPLOYMENT/Deploy-DigiVista-SAFE-Branding-v1.ps1
+02_DEPLOYMENT/Deploy-Vaultwarden-HTTPS.ps1
+02_DEPLOYMENT/DigiVista-Vaultwarden-OneGo-Deploy.ps1
+03_TROUBLESHOOTING/Restore-Vaultwarden-Login-Safely.ps1

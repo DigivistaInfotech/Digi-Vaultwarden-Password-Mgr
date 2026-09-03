@@ -1,0 +1,43 @@
+/* DigiVista Secure Vault - Custom Branding CSS */
+/* Colors extracted from official DigiVista Infotech logo */
+
+:root {
+  --color-primary: #064679 !important;
+  --color-accent: #FF9915 !important;
+  --color-secondary: #8BA9C0 !important;
+}
+
+/* Header / Navbar */
+.navbar, header, .app-header {
+  background-color: #064679 !important;
+}
+
+/* Primary buttons */
+.btn-primary, button.primary, .bwi-btn-primary {
+  background-color: #064679 !important;
+  border-color: #064679 !important;
+}
+
+.btn-primary:hover {
+  background-color: #FF9915 !important;
+  border-color: #FF9915 !important;
+}
+
+/* Links */
+a, .text-primary {
+  color: #064679 !important;
+}
+
+a:hover {
+  color: #FF9915 !important;
+}
+
+/* Accent highlights */
+.badge-primary, .accent {
+  background-color: #FF9915 !important;
+}
+
+/* Login page branding */
+.login-page-logo, .environment-selector {
+  filter: none !important;
+}

@@ -1,0 +1,26 @@
+localhost {
+	tls internal
+
+	handle /digivista-assets/* {
+		uri strip_prefix /digivista-assets
+		root * C:/ProgramData/DigiVista/SecureVault/assets
+		file_server
+	}
+
+	handle /open-source-notices* {
+		root * C:/ProgramData/DigiVista/SecureVault/open-source-notices
+		rewrite * /index.html
+		file_server
+	}
+
+	handle /licenses/* {
+		uri strip_prefix /licenses
+		root * C:/ProgramData/DigiVista/SecureVault/licenses
+		file_server
+	}
+
+	@customcss path /css/vaultwarden.css
+	header @customcss Cache-Control "no-store, no-cache, must-revalidate"
+
+	reverse_proxy 127.0.0.1:8080
+}

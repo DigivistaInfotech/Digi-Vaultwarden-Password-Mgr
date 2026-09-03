@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "approvedOn": "2026-08-30",
+  "vaultwarden": {
+    "version": "1.37.2",
+    "webVaultVersion": "2026.7.0",
+    "imageId": "d5b851abc3aa14b52feea09652bb467753f0ef12516cc9af9df254782eab15fb",
+    "repositoryDigests": [
+      "sha256:094b5689ed81549bd293418395c7cf495ae9d960fc2d4928cef2083ef913d912",
+      "sha256:5d326778c22f063d093d6b0c9c766a28249561632266776f2c93132ab0ad3a80"
+    ]
+  },
+  "podmanVersion": "6.0.2",
+  "caddyVersion": "2.11.4",
+  "containerName": "vaultwarden",
+  "dataVolumeName": "vaultwarden-data",
+  "backendPort": 8080,
+  "httpsHost": "localhost",
+  "startupTaskName": "DigiVista-Secure-Vault-Stack"
+}

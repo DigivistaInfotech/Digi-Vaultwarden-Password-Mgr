@@ -1,0 +1,222 @@
+/* DIGIVISTA_PHASE2_EXTERNAL_BRANDING_20260830
+   External visual branding only. No Vaultwarden source, authentication,
+   database, user, password, or vault-record modification. */
+
+:root {
+  --dv-primary: #063b66;
+  --dv-deep: #042b4a;
+  --dv-active: #0a4f82;
+  --dv-page: #f6f9fc;
+  --dv-border: #dce6ef;
+  --dv-text: #102a43;
+  --dv-logo: url("/digivista-assets/DigiVista_Logo.png");
+}
+
+html,
+body {
+  background-color: var(--dv-page) !important;
+  color: var(--dv-text);
+}
+
+button[type="submit"],
+button[buttontype="primary"],
+[bitbutton][buttontype="primary"],
+.btn-primary,
+.bwi-btn-primary {
+  background-color: var(--dv-primary) !important;
+  border-color: var(--dv-primary) !important;
+  color: #fff !important;
+}
+
+button[type="submit"]:hover,
+button[buttontype="primary"]:hover,
+[bitbutton][buttontype="primary"]:hover,
+.btn-primary:hover,
+.bwi-btn-primary:hover {
+  background-color: var(--dv-active) !important;
+  border-color: var(--dv-active) !important;
+}
+
+app-root img.new-logo-themed {
+  content: var(--dv-logo) !important;
+  width: min(360px, 78vw) !important;
+  max-height: 92px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* Web Vault 2026.7+ renders the anonymous-page logo as an inline bit-svg.
+   Apply branding to the stable landing-header link so Angular re-rendering
+   cannot restore the upstream SVG after the first paint. */
+bit-landing-header a[href="#/"] {
+  width: min(360px, 78vw) !important;
+  height: 76px !important;
+  padding-block: 8px !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+bit-landing-header a[href="#/"] > bit-svg {
+  visibility: hidden !important;
+}
+
+.navbar,
+.app-header {
+  background-color: var(--dv-deep) !important;
+}
+
+bit-nav-logo bit-nav-item .bwi-shield {
+  display: none !important;
+}
+
+bit-nav-logo bit-nav-item a::before {
+  content: "" !important;
+  display: block !important;
+  width: 265px !important;
+  max-width: calc(100% - 18px) !important;
+  height: 58px !important;
+  margin: 6px auto !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+bit-nav-logo bit-nav-item a > span {
+  display: none !important;
+}
+
+/* Web Vault 2026.7+ authenticated sidebar logo. The bit-nav-item wrapper is
+   not present in every layout, so bind the presentation to bit-nav-logo's
+   stable home link and suppress only its upstream visual child. */
+bit-nav-logo {
+  display: block !important;
+  min-height: 88px !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 230px auto !important;
+}
+
+bit-nav-logo > div {
+  min-height: 88px !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 230px auto !important;
+}
+
+bit-nav-logo a {
+  min-height: 72px !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 230px auto !important;
+}
+
+bit-nav-logo a > bit-svg,
+bit-nav-logo > div > a > bit-svg,
+bit-nav-logo a > svg,
+bit-nav-logo a > img,
+bit-nav-logo a > span {
+  visibility: hidden !important;
+}
+
+.tw-bg-sidebar,
+.bit-sidebar,
+aside {
+  background-color: var(--dv-deep) !important;
+}
+
+.tw-bg-sidebar a[aria-current="page"],
+aside a[aria-current="page"] {
+  background-color: var(--dv-active) !important;
+}
+
+/* DigiVista polished anonymous-page presentation. Authentication structure,
+   labels, controls, validation, and compliance footer remain unchanged. */
+bit-landing-layout > div {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(16, 111, 168, 0.14), transparent 30%),
+    radial-gradient(circle at 88% 24%, rgba(243, 145, 35, 0.12), transparent 28%),
+    linear-gradient(145deg, #eef6fb 0%, #f8fbfd 48%, #edf3f8 100%) !important;
+}
+
+bit-landing-header header {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-bottom: 1px solid rgba(6, 59, 102, 0.09) !important;
+  box-shadow: 0 8px 30px rgba(4, 43, 74, 0.06) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+bit-landing-content > div {
+  background: transparent !important;
+}
+
+bit-landing-card bit-base-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(6, 59, 102, 0.13) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 70px rgba(4, 43, 74, 0.15) !important;
+  backdrop-filter: blur(14px) !important;
+  color: var(--dv-text) !important;
+}
+
+bit-landing-card label,
+bit-landing-card bit-label,
+bit-landing-card input {
+  color: var(--dv-text) !important;
+}
+
+bit-landing-card a {
+  color: var(--dv-active) !important;
+}
+
+bit-landing-hero h1,
+bit-landing-hero h2 {
+  color: var(--dv-deep) !important;
+  letter-spacing: -0.025em !important;
+}
+
+bit-form-field [bitfieldcontainer] {
+  background: #f8fbfd !important;
+  border-color: #bed0df !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease !important;
+}
+
+bit-form-field [bitfieldcontainer]:focus-within {
+  background: #fff !important;
+  border-color: var(--dv-active) !important;
+  box-shadow: 0 0 0 4px rgba(10, 79, 130, 0.12) !important;
+}
+
+bit-landing-card button[type="submit"] {
+  min-height: 46px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px rgba(6, 59, 102, 0.2) !important;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease !important;
+}
+
+bit-landing-card button[type="submit"]:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 14px 28px rgba(6, 59, 102, 0.24) !important;
+}
+
+bit-landing-footer footer {
+  background: transparent !important;
+  color: #536b7d !important;
+}
+
+@media (max-width: 639px) {
+  bit-landing-header header {
+    justify-content: center !important;
+  }
+
+  bit-landing-card bit-base-card {
+    padding: 22px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 18px 45px rgba(4, 43, 74, 0.12) !important;
+  }
+}
