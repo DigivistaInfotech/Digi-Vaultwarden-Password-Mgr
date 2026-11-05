@@ -933,17 +933,24 @@ bit-landing-footer footer::after {
 /* DigiVista polished anonymous-page presentation. Authentication structure,
    labels, controls, validation, and compliance footer remain unchanged. */
 bit-landing-layout > div {
-  background:
-    radial-gradient(circle at 12% 18%, rgba(16, 111, 168, 0.14), transparent 30%),
-    radial-gradient(circle at 88% 24%, rgba(243, 145, 35, 0.12), transparent 28%),
-    linear-gradient(145deg, #eef6fb 0%, #f8fbfd 48%, #edf3f8 100%) !important;
+  background: #f3f7fb !important;
+}
+
+/* Keep anonymous pages calm and business-like. Upstream decorative corner
+   artwork and glow layers compete with the form and can appear to flicker
+   while the application hydrates. */
+bit-landing-layout > div::before,
+bit-landing-layout > div::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
 }
 
 bit-landing-header header {
-  background: rgba(255, 255, 255, 0.82) !important;
+  background: #ffffff !important;
   border-bottom: 1px solid rgba(6, 59, 102, 0.09) !important;
-  box-shadow: 0 8px 30px rgba(4, 43, 74, 0.06) !important;
-  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 4px 18px rgba(4, 43, 74, 0.05) !important;
+  backdrop-filter: none !important;
 }
 
 bit-landing-content > div {
@@ -967,10 +974,8 @@ bit-landing-content::before {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-top: 5px solid var(--dv-accent);
   border-radius: 28px;
-  background:
-    radial-gradient(circle at 88% 12%, rgba(32, 139, 197, 0.42), transparent 34%),
-    linear-gradient(145deg, #082f50 0%, #0a4f82 58%, #126da6 100%);
-  box-shadow: 0 28px 80px rgba(4, 43, 74, 0.22);
+  background: linear-gradient(145deg, #082f50 0%, #0a4f82 100%);
+  box-shadow: 0 18px 48px rgba(4, 43, 74, 0.16);
   color: #fff;
   font-size: clamp(15px, 1.2vw, 17px);
   font-weight: 500;
@@ -1000,12 +1005,12 @@ bit-landing-content::before {
 bit-landing-card bit-base-card {
   position: relative !important;
   overflow: hidden !important;
-  background: rgba(255, 255, 255, 0.94) !important;
+  background: #ffffff !important;
   border: 1px solid rgba(6, 59, 102, 0.13) !important;
   border-top: 4px solid var(--dv-accent) !important;
   border-radius: 24px !important;
-  box-shadow: 0 24px 70px rgba(4, 43, 74, 0.15) !important;
-  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 16px 42px rgba(4, 43, 74, 0.12) !important;
+  backdrop-filter: none !important;
   color: var(--dv-text) !important;
 }
 
