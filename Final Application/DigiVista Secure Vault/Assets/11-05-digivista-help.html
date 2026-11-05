@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DigiVista Secure Vault Help</title>
+  <style>
+    :root { --navy:#123b5d; --blue:#126aa0; --orange:#f7941d; --ink:#142b42; --muted:#52677b; --bg:#f4f7fb; --line:#d9e3ee; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+    header { background:linear-gradient(120deg,var(--navy),var(--blue)); color:white; border-top:4px solid var(--orange); }
+    header div, main, footer { width:min(1120px,calc(100% - 32px)); margin:auto; }
+    header div { padding:36px 0 30px; }
+    h1 { margin:0 0 8px; font-size:clamp(1.9rem,4vw,2.8rem); }
+    h2 { color:var(--navy); margin-top:0; }
+    h3 { margin-bottom:6px; }
+    a { color:#075e96; }
+    .notice { margin:24px 0; padding:16px 18px; background:#fff7e8; border-left:4px solid var(--orange); border-radius:8px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+    .card { background:white; padding:20px; border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(18,59,93,.06); }
+    .steps { counter-reset:step; padding:0; list-style:none; }
+    .steps li { counter-increment:step; margin:12px 0; padding-left:42px; position:relative; }
+    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; color:white; background:var(--blue); font-weight:700; }
+    code { background:#eaf1f7; padding:2px 6px; border-radius:4px; }
+    main { padding:12px 0 36px; }
+    section { margin-top:24px; }
+    footer { padding:22px 0 34px; color:var(--muted); font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <header><div><h1>DigiVista Secure Vault Help</h1><p>Simple guidance for individuals, families and business teams.</p></div></header>
+  <main>
+    <div class="notice"><strong>Privacy promise:</strong> DigiVista administrators must not know or store your master password. Vault contents remain encrypted. Keep your recovery material offline and secure.</div>
+
+    <section><h2>Start safely</h2><ol class="steps">
+      <li>Create your own memorable master password; do not reuse it anywhere else.</li>
+      <li>Enable two-step login and store its recovery code offline.</li>
+      <li>Prepare the recovery kit, add a private password hint and register an approved recovery option.</li>
+      <li>Confirm that encrypted backups run to a separate device or customer-controlled location.</li>
+      <li>Create one test record and confirm that you can view, edit and delete it.</li>
+    </ol></section>
+
+    <section><h2>Choose the correct category</h2><div class="grid">
+      <article class="card"><h3>Website &amp; Application</h3><p>Website URL, username, password, TOTP and account notes.</p></article>
+      <article class="card"><h3>Personal Accounts</h3><p>Private personal credentials. Do not place these in a company collection.</p></article>
+      <article class="card"><h3>Desktop &amp; Laptop</h3><p>Device name, local/domain username, owner and review date.</p></article>
+      <article class="card"><h3>Server &amp; Infrastructure</h3><p>Host/IP, environment, privileged account, owner and expiry date.</p></article>
+      <article class="card"><h3>Network Devices</h3><p>Router, switch, Wi-Fi and VPN credentials with asset/location details.</p></article>
+      <article class="card"><h3>Security Appliances</h3><p>Firewall, endpoint, monitoring and other security-console accounts.</p></article>
+      <article class="card"><h3>Banking &amp; Finance</h3><p>Highly restricted personal or approved finance-team records.</p></article>
+      <article class="card"><h3>Shared Team Credentials</h3><p>Business credentials shared only through authorized organization collections.</p></article>
+    </div></section>
+
+    <section><h2>Home and family use</h2><p>Use private folders for Websites, Personal, Banking, Wi-Fi, Devices, Documents and Secure Notes. Share only selected records with a family collection; private records remain private.</p></section>
+
+    <section><h2>Business access model</h2><div class="grid">
+      <article class="card"><h3>Owner / Super Administrator</h3><p>Manages the organization, policies, recovery enrollment and access reviews. This role does not reveal users' private vault contents.</p></article>
+      <article class="card"><h3>Administrator</h3><p>Invites users and assigns approved groups/collections. Users create their own master passwords.</p></article>
+      <article class="card"><h3>Department User</h3><p>Uses only assigned collections and their own private vault.</p></article>
+      <article class="card"><h3>Read-only / Limited User</h3><p>Receives only the minimum view or edit rights required for work.</p></article>
+    </div></section>
+
+    <section><h2>If you forget the master password</h2><p>Email can deliver a hint or an approved recovery workflow, but it cannot reveal the old master password. Try a previously unlocked trusted device, configured passkey, emergency access or pre-enrolled organization recovery. Without a configured recovery method, the encrypted personal vault cannot be decrypted.</p></section>
+
+    <section><h2>Backup and restore</h2><p>Back up the full persistent data directory, attachments, sends, cryptographic keys and deployment configuration. Keep an encrypted copy away from the Vault server and test restoration regularly. A server backup key and a user's master password are separate secrets.</p></section>
+
+    <section><h2>Employee change or exit</h2><p>Revoke sessions, remove group/collection access, rotate shared credentials and preserve required audit evidence. Never ask the departing user to disclose their master password.</p></section>
+
+    <section><h2>Need support?</h2><p>Contact the designated DigiVista/customer administrator for configuration help. Never send a master password, recovery key, TOTP secret or vault export through email or a support ticket.</p></section>
+  </main>
+  <footer>DigiVista Secure Vault uses the unmodified Vaultwarden server. <a href="/open-source-notices">Open-source notices and AGPL information</a>.</footer>
+</body>
+</html>

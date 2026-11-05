@@ -1,0 +1,34 @@
+{
+	auto_https disable_redirects
+}
+
+localhost {
+	tls internal
+
+	handle /open-source-notices* {
+		root * C:/Users/TOOLS/OneDrive/Documents/ChatGPT/Digi-Vaultwarden-30Aug/DigiVista-Secure-Vault-Codex-Handoff-2026-08-30/04_ASSETS
+		rewrite * /08-30-open-source-notices.html
+		file_server
+	}
+
+	handle /help* {
+		root * C:/Users/TOOLS/OneDrive/Documents/ChatGPT/Digi-Vaultwarden-30Aug/DigiVista-Secure-Vault-Codex-Handoff-2026-08-30/04_ASSETS
+		rewrite * /11-05-digivista-help.html
+		file_server
+	}
+
+	handle_path /licenses/* {
+		root * C:/Users/TOOLS/OneDrive/Documents/ChatGPT/Digi-Vaultwarden-30Aug/DigiVista-Secure-Vault-Codex-Handoff-2026-08-30/05_REFERENCE
+		file_server
+	}
+
+	handle_path /digivista-assets/* {
+		root * C:/Users/TOOLS/OneDrive/Documents/ChatGPT/Digi-Vaultwarden-30Aug/DigiVista-Secure-Vault-Codex-Handoff-2026-08-30/04_ASSETS
+		file_server
+	}
+
+	@customcss path /css/vaultwarden.css
+	header @customcss Cache-Control "no-store, no-cache, must-revalidate"
+
+	reverse_proxy 127.0.0.1:8080
+}

@@ -1,0 +1,1256 @@
+/* DIGIVISTA_PHASE2_EXTERNAL_BRANDING_20260830
+   External visual branding only. No Vaultwarden source, authentication,
+   database, user, password, or vault-record modification. */
+
+:root {
+  --dv-primary: #095b89;
+  --dv-primary-hover: #07476b;
+  --dv-deep: #102e49;
+  --dv-active: #1d506f;
+  --dv-accent: #ff981a;
+  --dv-page: #f4f7fc;
+  --dv-surface: #ffffff;
+  --dv-panel: #edf4fa;
+  --dv-border: #d6e2ee;
+  --dv-text: #17374f;
+  --dv-muted: #526b80;
+  --dv-info-text: #095b89;
+  --dv-info-bg: #eaf3fb;
+  --dv-success: #19683e;
+  --dv-success-bg: #eaf7ef;
+  --dv-warning: #8a4b08;
+  --dv-warning-bg: #fff3df;
+  --dv-danger: #ad2929;
+  --dv-danger-bg: #fff0ef;
+  --dv-inactive: #526174;
+  --dv-inactive-bg: #edf0f4;
+  --dv-radius: 12px;
+  --dv-control-radius: 8px;
+  --dv-shadow: 0 6px 18px rgba(16, 46, 73, 0.08);
+  --dv-logo: url("/digivista-assets/DigiVista_Logo.png");
+}
+
+/* DigiVista is a single light application theme. Normalize the upstream
+   semantic design tokens when a saved Vaultwarden preference applies
+   .theme_dark; otherwise overlays and dynamically rendered controls inherit
+   dark foregrounds while our branded surfaces remain light. Navigation keeps
+   its dedicated nav tokens and therefore remains navy. */
+.theme_dark {
+  --color-background: 244 247 252;
+  --color-background-alt: 255 255 255;
+  --color-background-alt2: 237 244 250;
+  --color-background-alt3: 244 247 252;
+  --color-background-alt4: 255 255 255;
+  --color-text-main: 23 55 79;
+  --color-text-muted: 82 107 128;
+  --color-text-contrast: 255 255 255;
+  --color-text-alt2: 23 55 79;
+  --color-hover-default: rgb(9 91 137 / 0.08);
+  --color-hover-contrast: rgb(255 255 255 / 0.12);
+  --tw-ring-offset-color: #ffffff;
+
+  --color-fg-heading: var(--dv-text);
+  --color-fg-body: var(--dv-muted);
+  --color-fg-body-subtle: #6b8092;
+  --color-fg-inactive: var(--dv-inactive);
+  --color-fg-contrast: #ffffff;
+  --color-fg-contrast-strong: #edf4fa;
+  --color-fg-brand-soft: #6ea8c6;
+  --color-fg-brand: var(--dv-primary);
+  --color-fg-brand-strong: var(--dv-primary-hover);
+
+  --color-bg-primary: var(--dv-surface);
+  --color-bg-secondary: var(--dv-panel);
+  --color-bg-tertiary: var(--dv-page);
+  --color-bg-quaternary: #e2ecf5;
+  --color-bg-inactive: var(--dv-inactive-bg);
+  --color-bg-hover: var(--dv-info-bg);
+  --color-bg-contrast-soft: #24516f;
+  --color-bg-contrast: var(--dv-deep);
+  --color-bg-contrast-strong: #071f32;
+  --color-bg-brand-softer: #f0f7fb;
+  --color-bg-brand-soft: var(--dv-info-bg);
+  --color-bg-brand-medium: #bdd8e7;
+  --color-bg-brand: var(--dv-primary);
+  --color-bg-brand-strong: var(--dv-primary-hover);
+  --color-bg-brand-stronger: var(--dv-deep);
+
+  --color-border-base: var(--dv-border);
+  --color-border-light: #e7eef5;
+  --color-border-muted: #e7eef5;
+  --color-border-strong: #9db5c8;
+  --color-border-stronger: #6f8da5;
+  --color-border-focus: var(--dv-primary);
+  --color-border-brand: var(--dv-primary);
+  --color-border-brand-soft: #9ec7dc;
+  --color-border-brand-strong: var(--dv-primary-hover);
+
+  --color-fg-success: var(--dv-success);
+  --color-fg-success-strong: #124d2d;
+  --color-bg-success-soft: var(--dv-success-bg);
+  --color-fg-warning: var(--dv-warning);
+  --color-fg-warning-strong: #693705;
+  --color-bg-warning-soft: var(--dv-warning-bg);
+  --color-fg-danger: var(--dv-danger);
+  --color-fg-danger-strong: #851f1f;
+  --color-bg-danger-soft: var(--dv-danger-bg);
+}
+
+html,
+body {
+  background-color: var(--dv-page) !important;
+  color: var(--dv-text);
+  font-family: Arial, Helvetica, "Noto Sans Devanagari", "Nirmala UI", sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+button[type="submit"],
+button[buttontype="primary"],
+[bitbutton][buttontype="primary"],
+.btn-primary,
+.bwi-btn-primary {
+  background-color: var(--dv-primary) !important;
+  border-color: var(--dv-primary) !important;
+  color: #fff !important;
+}
+
+button[type="submit"]:hover,
+button[buttontype="primary"]:hover,
+[bitbutton][buttontype="primary"]:hover,
+.btn-primary:hover,
+.bwi-btn-primary:hover {
+  background-color: var(--dv-primary-hover) !important;
+  border-color: var(--dv-primary-hover) !important;
+}
+
+app-root img.new-logo-themed {
+  content: var(--dv-logo) !important;
+  width: min(360px, 78vw) !important;
+  max-height: 92px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* Web Vault 2026.7+ renders the anonymous-page logo as an inline bit-svg.
+   Apply branding to the stable landing-header link so Angular re-rendering
+   cannot restore the upstream SVG after the first paint. */
+bit-landing-header a[href="#/"] {
+  width: min(360px, 78vw) !important;
+  height: 76px !important;
+  padding-block: 8px !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+bit-landing-header a[href="#/"] > bit-svg {
+  visibility: hidden !important;
+}
+
+.navbar,
+.app-header {
+  background-color: var(--dv-deep) !important;
+}
+
+bit-nav-logo bit-nav-item .bwi-shield {
+  display: none !important;
+}
+
+bit-nav-logo bit-nav-item a::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+bit-nav-logo bit-nav-item a > span {
+  display: none !important;
+}
+
+/* Web Vault 2026.7+ authenticated sidebar logo. The bit-nav-item wrapper is
+   not present in every layout, so bind the presentation to bit-nav-logo's
+   stable home link and suppress only its upstream visual child. */
+bit-nav-logo {
+  display: block !important;
+  min-height: 88px !important;
+  background: transparent !important;
+}
+
+bit-nav-logo > div {
+  min-height: 88px !important;
+  width: calc(100% - 24px) !important;
+  margin: 12px !important;
+  box-sizing: border-box !important;
+  background-color: #ffffff !important;
+  background-image: var(--dv-logo) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: calc(100% - 24px) auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.72) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+bit-nav-logo a {
+  min-height: 72px !important;
+  background: transparent !important;
+}
+
+bit-nav-logo a > bit-svg,
+bit-nav-logo > div > a > bit-svg,
+bit-nav-logo a > svg,
+bit-nav-logo a > img,
+bit-nav-logo a > span {
+  display: none !important;
+}
+
+.tw-bg-sidebar,
+.bit-sidebar {
+  background: var(--dv-deep) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 8px 0 28px rgba(7, 31, 63, 0.12) !important;
+}
+
+.tw-bg-sidebar a[aria-current="page"],
+.bit-sidebar a[aria-current="page"] {
+  background-color: var(--dv-active) !important;
+  box-shadow: inset 4px 0 0 var(--dv-accent) !important;
+}
+
+.tw-bg-sidebar a,
+.bit-sidebar a {
+  border-radius: 9px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: background-color 150ms ease, color 150ms ease !important;
+}
+
+.tw-bg-sidebar a:hover,
+.bit-sidebar a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.tw-bg-sidebar svg,
+.bit-sidebar svg {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+/* Web Vault 2026.7 authenticated navigation uses bit-nav-item components
+   without consistently exposing the sidebar utility class. */
+bit-nav-item a {
+  border-radius: 10px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+bit-nav-item a:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+bit-nav-item a[aria-current="page"],
+bit-nav-item a.tw-bg-secondary-600,
+bit-nav-item a.tw-bg-secondary-700 {
+  background: var(--dv-active) !important;
+  color: #ffffff !important;
+  box-shadow: inset 4px 0 0 var(--dv-accent), 0 7px 18px rgba(0, 0, 0, 0.16) !important;
+}
+
+bit-nav-item a[aria-current="page"] svg,
+bit-nav-item a.tw-bg-secondary-600 svg,
+bit-nav-item a.tw-bg-secondary-700 svg {
+  color: #ffffff !important;
+}
+
+/* Make Vaultwarden's native multi-account control easy to identify without
+   replacing or bypassing its per-account authentication boundary. */
+header button[bit-avatar] {
+  border: 2px solid rgba(247, 148, 29, 0.88) !important;
+  box-shadow: 0 0 0 4px rgba(11, 79, 148, 0.12), 0 8px 18px rgba(7, 31, 63, 0.16) !important;
+  transition: transform 150ms ease, box-shadow 150ms ease !important;
+}
+
+header button[bit-avatar]:hover,
+header button[bit-avatar]:focus-visible {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 0 0 5px rgba(247, 148, 29, 0.16), 0 10px 22px rgba(7, 31, 63, 0.2) !important;
+}
+
+/* Official DigiVista orange is used as a controlled brand accent. */
+app-root::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10000;
+  height: 4px;
+  background: linear-gradient(90deg, var(--dv-accent) 0 18%, var(--dv-primary) 18% 100%);
+  pointer-events: none;
+}
+
+/* Shared application shell dimensions from the DigiVista standard. */
+bit-nav {
+  width: 240px !important;
+  min-width: 240px !important;
+  flex-basis: 240px !important;
+}
+
+.tw-bg-sidebar::before,
+.bit-sidebar::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--dv-accent);
+}
+
+/* Consistent authenticated-page organization. These rules style only stable
+   presentation primitives; they do not move, remove, or rewrite workflows. */
+main,
+[role="main"] {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(11, 79, 148, 0.08), transparent 28%),
+    var(--dv-page) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+main h1,
+main h2,
+main h3,
+[role="main"] h1,
+[role="main"] h2,
+[role="main"] h3 {
+  color: var(--dv-deep) !important;
+  letter-spacing: -0.018em !important;
+}
+
+main h1,
+[role="main"] h1 {
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  line-height: 1.25 !important;
+}
+
+main h2,
+main h3,
+[role="main"] h2,
+[role="main"] h3 {
+  font-size: 18px !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+}
+
+main h1::after,
+[role="main"] h1::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--dv-accent);
+}
+
+main p,
+main .text-muted,
+[role="main"] .text-muted {
+  color: var(--dv-muted);
+}
+
+bit-base-card,
+bit-card,
+.card,
+[bitcard] {
+  background: var(--dv-surface) !important;
+  border-color: var(--dv-border) !important;
+  border-radius: var(--dv-radius) !important;
+  box-shadow: var(--dv-shadow) !important;
+}
+
+.tw-bg-primary-600,
+.tw-bg-primary-700 {
+  background-color: var(--dv-primary) !important;
+}
+
+/* Preserve matching upstream surface/text tokens. Global replacement of
+   background utility classes can pair a light surface with dark-theme text,
+   so page backgrounds are styled only at their component boundaries. */
+app-vault-onboarding bit-accordion {
+  background: #ffffff !important;
+  border-color: var(--dv-border) !important;
+  box-shadow: 0 10px 26px rgba(7, 31, 63, 0.08) !important;
+}
+
+app-vault-onboarding [data-accordion-trigger] {
+  background: linear-gradient(90deg, #17456f, #247faf) !important;
+  border-top: 3px solid var(--dv-accent) !important;
+  color: #ffffff !important;
+}
+
+app-vault-onboarding [data-accordion-trigger] span,
+app-vault-onboarding [data-accordion-trigger] bit-icon,
+app-vault-onboarding [data-accordion-trigger] bit-icon-tile {
+  color: #ffffff !important;
+}
+
+app-vault-onboarding [data-accordion-content] {
+  background: #ffffff !important;
+  color: var(--dv-text) !important;
+}
+
+app-vault-onboarding app-onboarding-task,
+app-vault-onboarding app-onboarding-task div,
+app-vault-onboarding app-onboarding-task span {
+  color: var(--dv-text) !important;
+}
+
+app-vault-onboarding app-onboarding-task .tw-text-fg-inactive {
+  color: var(--dv-muted) !important;
+}
+
+/* Menus stay legible regardless of the active system theme. */
+bit-menu,
+[role="menu"] {
+  background: #ffffff !important;
+  color: var(--dv-text) !important;
+  border-color: var(--dv-border) !important;
+}
+
+bit-menu button,
+[role="menu"] button,
+bit-menu a,
+[role="menu"] a {
+  color: var(--dv-text) !important;
+}
+
+bit-menu button:not(:disabled):hover,
+[role="menu"] button:not(:disabled):hover,
+bit-menu a:hover,
+[role="menu"] a:hover {
+  background: #edf4fb !important;
+  color: var(--dv-primary) !important;
+}
+
+bit-menu button:disabled,
+[role="menu"] button:disabled {
+  color: var(--dv-muted) !important;
+  opacity: 0.58 !important;
+}
+
+.tw-text-primary-600,
+.tw-text-primary-700 {
+  color: var(--dv-active) !important;
+}
+
+.tw-border-secondary-300,
+.tw-border-secondary-400 {
+  border-color: var(--dv-border) !important;
+}
+
+bit-callout,
+[role="alert"] {
+  border-radius: 12px !important;
+}
+
+bit-form-field [bitfieldcontainer],
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background-color: #fbfdff !important;
+  border-color: #bed0df !important;
+  min-height: 40px !important;
+  border-radius: var(--dv-control-radius) !important;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+  background-color: #ffffff !important;
+  border-color: var(--dv-active) !important;
+  box-shadow: 0 0 0 4px rgba(10, 79, 130, 0.12) !important;
+}
+
+button,
+[bitbutton],
+.btn {
+  min-height: 40px !important;
+  border-radius: var(--dv-control-radius) !important;
+  font-weight: 600 !important;
+}
+
+button[buttontype="secondary"],
+[bitbutton][buttontype="secondary"],
+.btn-secondary {
+  background: #ffffff !important;
+  border: 1px solid var(--dv-primary) !important;
+  color: var(--dv-primary) !important;
+}
+
+button[buttontype="secondary"]:hover,
+[bitbutton][buttontype="secondary"]:hover,
+.btn-secondary:hover {
+  background: var(--dv-info-bg) !important;
+  border-color: var(--dv-primary-hover) !important;
+  color: var(--dv-primary-hover) !important;
+}
+
+button[buttontype="danger"],
+[bitbutton][buttontype="danger"],
+.btn-danger {
+  background: var(--dv-danger) !important;
+  border-color: var(--dv-danger) !important;
+  color: #ffffff !important;
+}
+
+label,
+bit-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+small,
+.helper-text {
+  font-size: 12px !important;
+}
+
+button[type="submit"],
+button[buttontype="primary"],
+[bitbutton][buttontype="primary"],
+.btn-primary,
+.bwi-btn-primary {
+  box-shadow: 0 8px 20px rgba(11, 79, 148, 0.22) !important;
+}
+
+button[type="submit"]:focus-visible,
+button[buttontype="primary"]:focus-visible,
+[bitbutton][buttontype="primary"]:focus-visible,
+.btn-primary:focus-visible,
+.bwi-btn-primary:focus-visible {
+  outline-color: var(--dv-accent) !important;
+}
+
+table,
+bit-table {
+  background: var(--dv-surface) !important;
+  border: 1px solid var(--dv-border) !important;
+  border-radius: var(--dv-radius) !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(4, 43, 74, 0.06) !important;
+  font-size: 13px !important;
+}
+
+table {
+  width: 100% !important;
+}
+
+bit-table {
+  display: block !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+/* Vault dashboard filter rail. Vaultwarden exposes stable test identifiers
+   here, which lets the external theme improve contrast without altering the
+   component structure or behaviour. */
+[data-testid="filters"] {
+  overflow: hidden !important;
+  background: var(--dv-surface) !important;
+  border: 1px solid var(--dv-border) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--dv-shadow) !important;
+}
+
+[data-testid="filters-header"] {
+  position: relative !important;
+  padding: 14px 18px !important;
+  background: linear-gradient(90deg, #edf4fb 0%, #ffffff 100%) !important;
+  border-bottom: 1px solid var(--dv-border) !important;
+  color: var(--dv-deep) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+[data-testid="filters-header"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--dv-accent);
+}
+
+[data-testid="filters-header"] a,
+[data-testid="filters-header"] button,
+[data-testid="filters-header"] svg {
+  color: var(--dv-primary) !important;
+}
+
+[data-testid="filters-body"] {
+  background: var(--dv-surface) !important;
+  color: var(--dv-text) !important;
+}
+
+[data-testid="filters-body"] a,
+[data-testid="filters-body"] button,
+[data-testid="filters-body"] label,
+[data-testid="filters-body"] span,
+[data-testid="filters-body"] svg {
+  color: var(--dv-text) !important;
+}
+
+[data-testid="filters-body"] input#search {
+  min-height: 42px !important;
+  background: #f7faff !important;
+  border: 1px solid #c9d8e8 !important;
+  color: var(--dv-text) !important;
+}
+
+[data-testid="filters-body"] input#search::placeholder {
+  color: var(--dv-muted) !important;
+  opacity: 1 !important;
+}
+
+[data-testid="filters-body"] input#search:focus {
+  background: #ffffff !important;
+  border-color: var(--dv-primary) !important;
+  box-shadow: 0 0 0 4px rgba(11, 79, 148, 0.11) !important;
+}
+
+[data-testid="filters-body"] hr {
+  margin-block: 16px !important;
+}
+
+/* Vault page workspace: give both columns a deliberate, balanced surface.
+   These selectors follow the stable app-vault component boundary and keep
+   all upstream interactions and permission checks intact. */
+app-vault > div.tw-flex.tw-flex-row {
+  gap: 20px !important;
+  margin-inline: 0 !important;
+  align-items: stretch !important;
+}
+
+app-vault > div.tw-flex.tw-flex-row > div:first-child,
+app-vault > div.tw-flex.tw-flex-row > div:last-child {
+  padding-inline: 0 !important;
+}
+
+app-vault > div.tw-flex.tw-flex-row > div:first-child {
+  flex-basis: 300px !important;
+  max-width: 300px !important;
+}
+
+app-vault > div.tw-flex.tw-flex-row > div:last-child {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  max-width: none !important;
+  min-height: 360px !important;
+  padding: 12px !important;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(11, 79, 148, 0.07), transparent 26%),
+    var(--dv-surface) !important;
+  border: 1px solid var(--dv-border) !important;
+  border-top: 3px solid var(--dv-accent) !important;
+  border-radius: var(--dv-radius) !important;
+  box-shadow: var(--dv-shadow) !important;
+}
+
+app-vault > div.tw-flex.tw-flex-row > div:last-child::before {
+  content: none !important;
+}
+
+app-vault > div.tw-flex.tw-flex-row > div:last-child > .tw-mt-6 {
+  min-height: 260px !important;
+  justify-content: center !important;
+  margin-top: 16px !important;
+  padding: 24px !important;
+}
+
+@media (max-width: 900px) {
+  app-vault > div.tw-flex.tw-flex-row {
+    flex-direction: column !important;
+  }
+
+  app-vault > div.tw-flex.tw-flex-row > div:first-child,
+  app-vault > div.tw-flex.tw-flex-row > div:last-child {
+    flex-basis: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  app-vault > div.tw-flex.tw-flex-row > div:last-child {
+    min-height: 320px !important;
+  }
+}
+
+/* Give the primary vault workspace a calm, product-grade hierarchy. */
+main bit-callout,
+[role="main"] bit-callout {
+  overflow: hidden !important;
+  border: 1px solid rgba(11, 79, 148, 0.16) !important;
+  border-top: 3px solid var(--dv-accent) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 24px rgba(7, 31, 63, 0.08) !important;
+}
+
+main bit-table,
+[role="main"] bit-table {
+  border-radius: 16px !important;
+  box-shadow: 0 12px 30px rgba(7, 31, 63, 0.07) !important;
+}
+
+main button[buttontype="primary"],
+[role="main"] button[buttontype="primary"] {
+  min-height: 42px !important;
+  padding-inline: 18px !important;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease !important;
+}
+
+main button[buttontype="primary"]:hover,
+[role="main"] button[buttontype="primary"]:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 12px 26px rgba(11, 79, 148, 0.25) !important;
+}
+
+thead,
+bit-table-header {
+  background: linear-gradient(180deg, #f4f8fb 0%, #eaf1f6 100%) !important;
+  color: var(--dv-deep) !important;
+  font-weight: 700 !important;
+}
+
+tbody tr,
+bit-table-row {
+  border-color: var(--dv-border) !important;
+}
+
+tbody tr:hover,
+bit-table-row:hover {
+  background: #f7fafc !important;
+}
+
+bit-dialog,
+[role="dialog"] {
+  background: var(--dv-surface) !important;
+  color: var(--dv-text) !important;
+  border: 1px solid var(--dv-border) !important;
+  border-radius: var(--dv-radius) !important;
+  box-shadow: 0 20px 56px rgba(16, 46, 73, 0.22) !important;
+}
+
+/* Dialogs must remain readable when the upstream account appearance is dark.
+   Scope the light DigiVista surface and its matching text tokens together. */
+bit-dialog header,
+bit-dialog footer,
+bit-dialog section,
+bit-dialog form,
+[role="dialog"] header,
+[role="dialog"] footer,
+[role="dialog"] section,
+[role="dialog"] form {
+  background: var(--dv-surface) !important;
+  color: var(--dv-text) !important;
+}
+
+bit-dialog h1,
+bit-dialog h2,
+bit-dialog h3,
+bit-dialog label,
+bit-dialog bit-label,
+bit-dialog legend,
+bit-dialog p,
+[role="dialog"] h1,
+[role="dialog"] h2,
+[role="dialog"] h3,
+[role="dialog"] label,
+[role="dialog"] bit-label,
+[role="dialog"] legend,
+[role="dialog"] p {
+  color: var(--dv-text) !important;
+}
+
+bit-dialog input:not([type="checkbox"]):not([type="radio"]),
+bit-dialog textarea,
+bit-dialog select,
+[role="dialog"] input:not([type="checkbox"]):not([type="radio"]),
+[role="dialog"] textarea,
+[role="dialog"] select {
+  background: #ffffff !important;
+  border-color: var(--dv-border) !important;
+  color: var(--dv-text) !important;
+  caret-color: var(--dv-text) !important;
+}
+
+bit-dialog input::placeholder,
+bit-dialog textarea::placeholder,
+[role="dialog"] input::placeholder,
+[role="dialog"] textarea::placeholder {
+  color: var(--dv-muted) !important;
+  opacity: 1 !important;
+}
+
+bit-dialog bit-form-field [bitfieldcontainer],
+[role="dialog"] bit-form-field [bitfieldcontainer] {
+  background: #ffffff !important;
+  border-color: var(--dv-border) !important;
+  color: var(--dv-text) !important;
+}
+
+bit-dialog [role="listbox"],
+[role="dialog"] [role="listbox"],
+[role="listbox"] {
+  background: #ffffff !important;
+  border: 1px solid var(--dv-border) !important;
+  color: var(--dv-text) !important;
+  box-shadow: 0 10px 28px rgba(16, 46, 73, 0.16) !important;
+}
+
+bit-dialog [role="option"],
+[role="dialog"] [role="option"],
+[role="listbox"] [role="option"] {
+  background: #ffffff !important;
+  color: var(--dv-text) !important;
+}
+
+[role="listbox"] [role="option"]:hover,
+[role="listbox"] [role="option"][aria-selected="true"] {
+  background: var(--dv-info-bg) !important;
+  color: var(--dv-primary-hover) !important;
+}
+
+/* Bitwarden uses ng-select for Folder, Brand, Expiration month and many
+   other add/edit fields. Style the complete control state together; its
+   dropdown panel is appended to body and therefore cannot rely on dialog
+   ancestry for contrast. */
+ng-select,
+bit-select ng-select,
+bit-multi-select ng-select {
+  color: var(--dv-text) !important;
+}
+
+ng-select .ng-select-container,
+bit-select ng-select .ng-select-container,
+bit-multi-select ng-select .ng-select-container {
+  min-height: 40px !important;
+  background: #ffffff !important;
+  border: 1px solid var(--dv-border) !important;
+  border-radius: var(--dv-control-radius) !important;
+  color: var(--dv-text) !important;
+  box-shadow: none !important;
+}
+
+ng-select.ng-select-focused .ng-select-container,
+ng-select.ng-select-opened .ng-select-container {
+  border-color: var(--dv-primary) !important;
+  box-shadow: 0 0 0 3px rgba(9, 91, 137, 0.14) !important;
+}
+
+ng-select .ng-value-container,
+ng-select .ng-value,
+ng-select .ng-value-label,
+ng-select .ng-placeholder,
+ng-select .ng-input,
+ng-select .ng-input > input {
+  color: var(--dv-text) !important;
+  opacity: 1 !important;
+}
+
+ng-select .ng-placeholder {
+  color: var(--dv-muted) !important;
+}
+
+ng-select .ng-input > input {
+  background: transparent !important;
+  caret-color: var(--dv-text) !important;
+}
+
+ng-select .ng-arrow-wrapper,
+ng-select .ng-clear-wrapper {
+  color: var(--dv-primary) !important;
+}
+
+ng-select .ng-arrow {
+  border-color: var(--dv-primary) transparent transparent !important;
+}
+
+ng-select.ng-select-opened .ng-arrow {
+  border-color: transparent transparent var(--dv-primary) !important;
+}
+
+.ng-dropdown-panel {
+  z-index: 11000 !important;
+  background: #ffffff !important;
+  border: 1px solid var(--dv-border) !important;
+  border-radius: var(--dv-control-radius) !important;
+  box-shadow: 0 12px 30px rgba(16, 46, 73, 0.18) !important;
+  color: var(--dv-text) !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items,
+.ng-dropdown-panel .ng-option {
+  background: #ffffff !important;
+  color: var(--dv-text) !important;
+}
+
+.ng-dropdown-panel .ng-option.ng-option-marked,
+.ng-dropdown-panel .ng-option.ng-option-selected {
+  background: var(--dv-info-bg) !important;
+  color: var(--dv-primary-hover) !important;
+}
+
+.ng-dropdown-panel .ng-option.ng-option-disabled,
+ng-select.ng-select-disabled .ng-select-container {
+  background: var(--dv-inactive-bg) !important;
+  color: var(--dv-inactive) !important;
+  opacity: 1 !important;
+}
+
+hr {
+  border-color: var(--dv-border) !important;
+}
+
+.badge,
+bit-badge {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(10, 79, 130, 0.28) !important;
+  outline-offset: 2px !important;
+}
+
+/* Keep required attribution available on anonymous and setup pages without
+   replacing any upstream legal or product information. */
+bit-landing-footer footer::after {
+  content: "DigiVista Secure Vault • Powered by Vaultwarden (AGPL-3.0) • Open-source notices: /open-source-notices";
+  display: block;
+  margin-top: 8px;
+  color: var(--dv-muted);
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* DigiVista polished anonymous-page presentation. Authentication structure,
+   labels, controls, validation, and compliance footer remain unchanged. */
+bit-landing-layout > div {
+  background: #f3f7fb !important;
+}
+
+/* Keep anonymous pages calm and business-like. Upstream decorative corner
+   artwork and glow layers compete with the form and can appear to flicker
+   while the application hydrates. */
+bit-landing-layout > div::before,
+bit-landing-layout > div::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+bit-landing-layout::before,
+bit-landing-layout::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Vaultwarden marks its anonymous-page background illustration as decorative.
+   Removing only aria-hidden artwork keeps controls and accessible icons intact. */
+bit-landing-layout [aria-hidden="true"]:has(> svg),
+bit-landing-layout svg[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* The pre-hydration Vaultwarden shell renders two large corner SVG panels as
+   direct children of app-root. Scope the removal to those anonymous-shell
+   children so in-app icons and accessible controls remain available. */
+body.layout_frontend app-root > .tw-flex > .tw-relative.tw-grow > .tw-hidden {
+  display: none !important;
+}
+
+bit-landing-header header {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(6, 59, 102, 0.09) !important;
+  box-shadow: 0 4px 18px rgba(4, 43, 74, 0.05) !important;
+  backdrop-filter: none !important;
+}
+
+bit-landing-content > div {
+  background: transparent !important;
+}
+
+bit-landing-content {
+  position: relative !important;
+  padding-inline: clamp(18px, 4vw, 48px) !important;
+}
+
+/* Corporate introduction derived from DigiVista's public brand language.
+   It is presentation-only; the upstream login component and its behaviour
+   remain owned and rendered by Vaultwarden. */
+bit-landing-content::before {
+  content: "DIGIVISTA INFOTECH  /  SECURE DIGITAL ACCESS\A\A Secure credentials. Connected work. Clear control.\A\A A trusted workspace for passwords and digital credentials, designed for controlled access and confident day-to-day use.\A\A ENCRYPTED VAULT   \2022   CONTROLLED ACCESS   \2022   CUSTOMER READY\A\A digivistainfotech.com  |  digivistainfotech.in";
+  display: block;
+  box-sizing: border-box;
+  width: min(560px, calc(50vw - 64px));
+  padding: clamp(32px, 4vw, 58px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 5px solid var(--dv-accent);
+  border-radius: 28px;
+  background: linear-gradient(145deg, #082f50 0%, #0a4f82 100%);
+  box-shadow: 0 18px 48px rgba(4, 43, 74, 0.16);
+  color: #fff;
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 500;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+@media (min-width: 960px) {
+  bit-landing-content {
+    display: grid !important;
+    grid-template-columns: minmax(400px, 560px) minmax(380px, 500px) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(44px, 6vw, 92px) !important;
+  }
+
+  bit-landing-content::before {
+    min-height: 500px;
+  }
+
+  bit-landing-content > div {
+    width: 100% !important;
+    max-width: 500px !important;
+  }
+}
+
+bit-landing-card bit-base-card {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(6, 59, 102, 0.13) !important;
+  border-top: 4px solid var(--dv-accent) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 16px 42px rgba(4, 43, 74, 0.12) !important;
+  backdrop-filter: none !important;
+  color: var(--dv-text) !important;
+}
+
+bit-landing-card bit-base-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--dv-accent) 0 32%, var(--dv-primary) 32% 100%);
+  pointer-events: none;
+}
+
+bit-landing-card label,
+bit-landing-card bit-label,
+bit-landing-card input {
+  color: var(--dv-text) !important;
+}
+
+bit-landing-card a {
+  color: var(--dv-active) !important;
+}
+
+bit-landing-hero h1,
+bit-landing-hero h2 {
+  color: var(--dv-deep) !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* Customer-facing login identity. Replace only the decorative hero artwork
+   and visible heading; the authentication form, labels and logic are intact. */
+bit-landing-hero bit-svg,
+bit-landing-hero > div > svg,
+bit-landing-hero > svg {
+  display: none !important;
+}
+
+bit-landing-hero {
+  position: relative !important;
+  padding-top: 14px !important;
+  text-align: center !important;
+}
+
+bit-landing-hero h1,
+bit-landing-hero h2 {
+  font-size: 0 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 8px !important;
+}
+
+bit-landing-hero h1::before,
+bit-landing-hero h2::before {
+  content: "Sign in to Secure Vault" !important;
+  display: block !important;
+  color: var(--dv-deep) !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+}
+
+bit-landing-hero h1::after,
+bit-landing-hero h2::after {
+  content: "Protected access for DigiVista customers and teams." !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 9px auto 0 !important;
+  background: none !important;
+  color: var(--dv-muted) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+bit-form-field [bitfieldcontainer] {
+  background: #f8fbfd !important;
+  border-color: #bed0df !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease !important;
+}
+
+bit-form-field [bitfieldcontainer]:focus-within {
+  background: #fff !important;
+  border-color: var(--dv-active) !important;
+  box-shadow: 0 0 0 4px rgba(10, 79, 130, 0.12) !important;
+}
+
+bit-landing-card button[type="submit"] {
+  min-height: 46px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px rgba(6, 59, 102, 0.2) !important;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease !important;
+}
+
+bit-landing-card button[type="submit"]:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 14px 28px rgba(6, 59, 102, 0.24) !important;
+}
+
+bit-landing-footer footer {
+  background: transparent !important;
+  color: #536b7d !important;
+}
+
+/* Simplified post-registration handoff. The optional upstream extension
+   promotion remains technically available outside this customer flow, but
+   DigiVista users see one clear action: continue into their vault. */
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) h1,
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) h2 {
+  font-size: 0 !important;
+}
+
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) h1::before {
+  content: "Your DigiVista Secure Vault is ready";
+  display: block;
+  color: var(--dv-deep);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) h2::before {
+  content: "Continue to your vault to securely create, organise and access credentials.";
+  display: block;
+  max-width: 620px;
+  margin: 10px auto 24px;
+  color: var(--dv-muted);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) a[href*="chromewebstore.google.com/detail/bitwarden"],
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) h2 + div,
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) img,
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) svg {
+  display: none !important;
+}
+
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) button {
+  min-width: 240px;
+  min-height: 48px;
+  border-radius: 12px !important;
+  font-size: 0 !important;
+  box-shadow: 0 12px 28px rgba(6, 59, 102, 0.2) !important;
+}
+
+bit-landing-content:has(a[href*="chromewebstore.google.com/detail/bitwarden"]) button::after {
+  content: "Continue to vault";
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (max-width: 639px) {
+  html,
+  body {
+    min-width: 320px !important;
+    overflow-x: hidden !important;
+  }
+
+  bit-landing-layout > div,
+  bit-landing-content,
+  main,
+  [role="main"] {
+    padding-left: max(16px, env(safe-area-inset-left)) !important;
+    padding-right: max(16px, env(safe-area-inset-right)) !important;
+  }
+
+  bit-landing-footer footer {
+    padding-bottom: max(14px, env(safe-area-inset-bottom)) !important;
+  }
+
+  main h1,
+  [role="main"] h1 {
+    font-size: 24px !important;
+  }
+
+  main,
+  [role="main"] {
+    padding-inline: 16px !important;
+  }
+
+  button,
+  [bitbutton],
+  .btn,
+  bit-form-field [bitfieldcontainer],
+  input:not([type="checkbox"]):not([type="radio"]),
+  select {
+    min-height: 44px !important;
+  }
+
+  bit-landing-header header {
+    justify-content: center !important;
+  }
+
+  bit-landing-content::before {
+    content: "DIGIVISTA SECURE VAULT\A Secure access for customers and teams\A digivistainfotech.com  |  digivistainfotech.in";
+    width: 100%;
+    margin: 4px auto 22px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  bit-landing-card bit-base-card {
+    padding: 22px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 18px 45px rgba(4, 43, 74, 0.12) !important;
+  }
+
+  bit-nav-logo > div {
+    background-size: 170px auto !important;
+  }
+
+  bit-base-card,
+  bit-card,
+  .card,
+  [bitcard] {
+    border-radius: 12px !important;
+    box-shadow: 0 6px 18px rgba(4, 43, 74, 0.07) !important;
+  }
+}

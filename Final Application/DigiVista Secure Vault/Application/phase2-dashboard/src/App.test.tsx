@@ -1,0 +1,27 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import App from "./App";
+
+describe("DigiVista dashboard", () => {
+  it("shows professional categories by default", () => {
+    render(<App />);
+    expect(screen.getByText("Network Devices")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Administration" })).toBeInTheDocument();
+  });
+
+  it("shows only family categories and removes administration", () => {
+    render(<App />);
+    fireEvent.change(screen.getByLabelText("Experience"), { target: { value: "family" } });
+    expect(screen.getByText("Games & Apps")).toBeInTheDocument();
+    expect(screen.queryByText("Network Devices")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Administration" })).not.toBeInTheDocument();
+  });
+
+  it("opens a guided secure template", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: /Network Devices/ }));
+    expect(screen.getByRole("heading", { level: 2, name: "Network Devices" })).toBeInTheDocument();
+    expect(screen.getByText("Management IP")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringContaining("type=login"));
+  });
+});

@@ -1,0 +1,17 @@
+node_modules/
+*.tsbuildinfo
+*.log
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+*.pfx
+*.p12
+**/data/
+**/backups/
+**/vault-export*
+**/06_*BACKUP/

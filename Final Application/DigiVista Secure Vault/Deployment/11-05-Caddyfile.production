@@ -1,0 +1,11 @@
+vault.digivistainfotech.in {
+	encode zstd gzip
+
+	handle /help* {
+		root * /config/help
+		rewrite * /index.html
+		file_server
+	}
+
+	reverse_proxy digivista-vault:80
+}
