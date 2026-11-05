@@ -5,6 +5,7 @@ USER root
 COPY 04_ASSETS/08-30-digivista-phase2-branding.scss /opt/digivista/user.vaultwarden.scss.hbs
 COPY 04_ASSETS/DigiVista_Logo.png /web-vault/digivista-assets/DigiVista_Logo.png
 COPY 04_ASSETS/08-30-open-source-notices.html /web-vault/open-source-notices/index.html
+COPY 04_ASSETS/11-05-digivista-help.html /web-vault/help/index.html
 COPY 05_REFERENCE/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt /web-vault/licenses/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt
 COPY 02_DEPLOYMENT/10-28-railway-entrypoint.sh /opt/digivista/railway-entrypoint.sh
 
@@ -12,6 +13,7 @@ RUN chmod 0755 /opt/digivista/railway-entrypoint.sh \
     && chmod 0644 /opt/digivista/user.vaultwarden.scss.hbs \
        /web-vault/digivista-assets/DigiVista_Logo.png \
        /web-vault/open-source-notices/index.html \
+       /web-vault/help/index.html \
        /web-vault/licenses/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt \
     && for manifest in /web-vault/*.json; do \
          if grep -q '"name": "Vaultwarden Web"' "$manifest"; then \

@@ -34,6 +34,8 @@ $requiredFiles = @(
     '02_DEPLOYMENT\08-30-Caddyfile.template',
     '04_ASSETS\08-30-digivista-phase2-branding.scss',
     '04_ASSETS\08-30-open-source-notices.html',
+    '04_ASSETS\11-05-digivista-help.html',
+    '11-05-Product-Operating-Standard.md',
     '05_REFERENCE\08-30-Approved-Component-Baseline.json',
     '05_REFERENCE\08-30-Vaultwarden-AGPL-3.0-LICENSE.txt'
 )
@@ -55,6 +57,7 @@ $maintainedTextFiles = @(
     (Join-Path $ScriptRoot '08-30-Caddyfile.template')
     (Join-Path $PackageRoot '04_ASSETS\08-30-digivista-phase2-branding.scss')
     (Join-Path $PackageRoot '04_ASSETS\08-30-open-source-notices.html')
+    (Join-Path $PackageRoot '04_ASSETS\11-05-digivista-help.html')
 ) | Where-Object { $_ }
 $allMaintainedText = ($maintainedTextFiles | ForEach-Object { Get-Content -LiteralPath $_ -Raw }) -join "`n"
 $prohibitedPatterns = [ordered]@{
@@ -89,6 +92,11 @@ Add-TestResult 'Branding brace balance' ($openBraces -eq $closeBraces) "Open=$op
 $notice = Get-Content -LiteralPath (Join-Path $PackageRoot '04_ASSETS\08-30-open-source-notices.html') -Raw
 $noticeValid = $notice -match 'Vaultwarden' -and $notice -match 'AGPL' -and $notice -match 'unmodified' -and $notice -notmatch 'Bitwarden'
 Add-TestResult 'Open-source notice contract' $noticeValid 'Vaultwarden, AGPL, unmodified statement, and public branding boundary checked'
+
+$help = Get-Content -LiteralPath (Join-Path $PackageRoot '04_ASSETS\11-05-digivista-help.html') -Raw
+$helpRequirements = @('Home and family use', 'Business access model', 'If you forget the master password', 'Backup and restore', 'Employee change or exit', '/open-source-notices')
+$missingHelp = @($helpRequirements | Where-Object { $help -notmatch [regex]::Escape($_) })
+Add-TestResult 'Help and onboarding contract' ($missingHelp.Count -eq 0) $(if ($missingHelp.Count) { 'Missing: ' + ($missingHelp -join ', ') } else { 'Home, business, recovery, backup, lifecycle, and attribution guidance present' })
 
 $licensePath = Join-Path $PackageRoot '05_REFERENCE\08-30-Vaultwarden-AGPL-3.0-LICENSE.txt'
 $license = Get-Content -LiteralPath $licensePath -Raw
