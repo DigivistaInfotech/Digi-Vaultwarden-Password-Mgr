@@ -946,6 +946,13 @@ bit-landing-layout > div::after {
   background: none !important;
 }
 
+bit-landing-layout::before,
+bit-landing-layout::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
 /* Vaultwarden marks its anonymous-page background illustration as decorative.
    Removing only aria-hidden artwork keeps controls and accessible icons intact. */
 bit-landing-layout [aria-hidden="true"]:has(> svg),
