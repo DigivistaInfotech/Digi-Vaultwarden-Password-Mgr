@@ -18,7 +18,7 @@ export function TemplateDialog({ category, onClose }: Props) {
 
   if (!category) return <dialog ref={dialogRef} />;
 
-  const secureUrl = `https://vault.digivistainfotech.in/#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
+  const secureUrl = `/#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
 
   return (
     <dialog ref={dialogRef} className="template-dialog" onClose={onClose}>

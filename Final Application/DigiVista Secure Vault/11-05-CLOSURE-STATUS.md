@@ -12,20 +12,19 @@ Date: 11-05-2026
 
 ## Not yet represented as complete
 
-- Phase 2 React is not yet wired to production identity/role APIs or deployed as the live dashboard.
-- Real organization roles, collections, country/company administration, and permission enforcement still use Vaultwarden's supported organization model and require final integration testing.
+- Phase 2 is packaged into the controlled container build and delegates encryption and authorization to Vaultwarden, but it is not yet deployed as the live dashboard.
+- Real organization roles, groups, collections, country/company administration, and permission enforcement use Vaultwarden's supported organization model and still require live multi-user acceptance testing.
 - Legal wording requires counsel approval before production marketing claims such as “fully compliant.”
 - A production backup/restore drill and user acceptance sign-off are required for formal closure.
 
 ## Closure path
 
-1. Review and approve the React dashboard against the acceptance checklist.
-2. Integrate only non-secret administrative metadata; keep vault contents exclusively in Vaultwarden.
-3. Configure and test Super Admin, Admin, Manager/Supervisor, User, Home, Teen, and Family/Child journeys.
-4. Run accessibility, mobile, cross-browser, security, permission-boundary, backup, and restore tests.
-5. Deploy Phase 2 with a rollback image and preserved persistent data mount.
-6. Obtain customer UAT and legal/privacy text approval.
-7. Record the release tag, deployment evidence, restore evidence, and final acceptance.
+1. Build and stage the controlled replacement container image.
+2. Configure and test Super Admin, Admin, Manager/Supervisor, User, Home, Teen, and Family/Child journeys on the live test environment.
+3. Run accessibility, mobile, cross-browser, security, permission-boundary, backup, and restore tests.
+4. Deploy Phase 2 with a rollback image and preserved persistent data mount.
+5. Obtain customer UAT and legal/privacy text approval.
+6. Record the release tag, deployment evidence, restore evidence, and final acceptance.
 
 ## Repository safety boundary
 

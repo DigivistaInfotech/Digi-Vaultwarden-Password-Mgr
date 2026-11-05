@@ -24,8 +24,12 @@ export default function App() {
         <div className="logo-panel"><img src="/dashboard/DigiVista_Logo.png" alt="DigiVista Infotech" /></div>
         <section className="profile-panel"><strong>{experience.label} workspace</strong><span>{company} · {country.name}</span></section>
         <nav aria-label="Primary navigation">
-          <button className="active">My dashboard</button><button>Vault</button><button>Security health</button><button>Help & recovery</button><a href="/dashboard/trust.html">Trust & policies</a>
-          {experienceId === "professional" && <button>Administration</button>}
+          <a className="active" href="/dashboard/" aria-current="page">My dashboard</a>
+          <a href="/#/vault">Vault</a>
+          <a href="/#/reports">Security health</a>
+          <a href="/help">Help & recovery</a>
+          <a href="/dashboard/trust.html">Trust & policies</a>
+          {experienceId === "professional" && <a href="/#/organizations">Administration</a>}
         </nav>
         <p className="trust-copy">Private by design<br />DigiVista cannot view your master password or private vault.</p>
       </aside>
@@ -41,7 +45,7 @@ export default function App() {
         </section>
         {thoughtVisible && <section className="daily-thought"><div><strong>Thought for today</strong> · {dailyThought}</div><button aria-label="Hide thought for today" onClick={() => setThoughtVisible(false)}>Hide</button></section>}
         <section className="summary-grid"><article className="hero"><small>Your secure workspace</small><h2>{experience.heroTitle}</h2><p>{experience.heroText}</p></article><article className="readiness"><h2>Security readiness</h2><p>● Master password protected</p><p>● Recovery kit acknowledged</p><p>● Two-step login enabled</p></article></section>
-        <section className="category-section"><header><div><h2>What would you like to manage?</h2><p>Choose a clearly labelled area. You can change this view at any time.</p></div><button>+ Save a credential</button></header><div className="category-grid">{experience.categories.map(category => <CategoryCard key={category.name} category={category} onOpen={setSelectedCategory} />)}</div></section>
+        <section className="category-section"><header><div><h2>What would you like to manage?</h2><p>Choose a clearly labelled area. You can change this view at any time.</p></div><button onClick={() => { window.location.href = "/#/vault?organizationId=unassigned&type=login&action=add"; }}>+ Save a credential</button></header><div className="category-grid">{experience.categories.map(category => <CategoryCard key={category.name} category={category} onOpen={setSelectedCategory} />)}</div></section>
         <footer className="page-footer"><span>DigiVista Secure Vault · Customer-controlled encrypted data</span><span>Powered by Vaultwarden · Open-source notices</span></footer>
       </main>
       <TemplateDialog category={selectedCategory} onClose={() => setSelectedCategory(null)} />
