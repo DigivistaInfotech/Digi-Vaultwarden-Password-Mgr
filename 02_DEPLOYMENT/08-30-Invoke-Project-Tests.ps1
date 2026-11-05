@@ -32,6 +32,7 @@ $requiredFiles = @(
     '02_DEPLOYMENT\08-30-Test-DigiVista-Compliance.ps1',
     '02_DEPLOYMENT\08-30-Invoke-Project-Tests.ps1',
     '02_DEPLOYMENT\08-30-Caddyfile.template',
+    '02_DEPLOYMENT\11-05-Caddyfile.production',
     '04_ASSETS\08-30-digivista-phase2-branding.scss',
     '04_ASSETS\08-30-open-source-notices.html',
     '04_ASSETS\11-05-digivista-help.html',
