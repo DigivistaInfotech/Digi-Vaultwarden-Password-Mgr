@@ -960,6 +960,13 @@ bit-landing-layout svg[aria-hidden="true"] {
   display: none !important;
 }
 
+/* The pre-hydration Vaultwarden shell renders two large corner SVG panels as
+   direct children of app-root. Scope the removal to those anonymous-shell
+   children so in-app icons and accessible controls remain available. */
+body.layout_frontend app-root > .tw-flex > .tw-relative.tw-grow > .tw-hidden {
+  display: none !important;
+}
+
 bit-landing-header header {
   background: #ffffff !important;
   border-bottom: 1px solid rgba(6, 59, 102, 0.09) !important;
