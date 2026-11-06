@@ -1,9 +1,12 @@
 (() => {
   "use strict";
 
-  const mode = new URLSearchParams(window.location.search).get("dv");
+  const searchParams = new URLSearchParams(window.location.search);
+  const mode = searchParams.get("dv");
+  const requestedFolder = searchParams.get("dvFolder");
   let actionWasRequested = window.location.hash.includes("action=add");
   let redirectPending = false;
+  let folderApplied = false;
 
   function hideStandardChecklist() {
     const dismiss = [...document.querySelectorAll("button, a")].find(element =>
@@ -28,8 +31,33 @@
     window.location.replace(`/dashboard/?from=${encodeURIComponent(reason)}`);
   }
 
+  function applyRequestedFolder() {
+    if (!requestedFolder || folderApplied || !window.location.hash.includes("action=add")) return;
+
+    const wanted = requestedFolder.trim().toLowerCase();
+    const folderLink = [...document.querySelectorAll('a[href*="folderId="]')].find(link =>
+      (link.textContent ?? "").trim().toLowerCase() === wanted
+    );
+    if (!folderLink) return;
+
+    const match = (folderLink.getAttribute("href") ?? "").match(/[?&]folderId=([^&]+)/);
+    if (!match?.[1] || match[1] === "unassigned") return;
+
+    const [route, rawQuery = ""] = window.location.hash.slice(1).split("?");
+    const hashParams = new URLSearchParams(rawQuery);
+    if (hashParams.get("folderId") === match[1]) {
+      folderApplied = true;
+      return;
+    }
+
+    hashParams.set("folderId", match[1]);
+    folderApplied = true;
+    window.location.replace(`${window.location.pathname}${window.location.search}#${route}?${hashParams.toString()}`);
+  }
+
   function syncJourney() {
     hideStandardChecklist();
+    applyRequestedFolder();
     const hash = window.location.hash;
 
     if (hash.includes("action=add")) actionWasRequested = true;

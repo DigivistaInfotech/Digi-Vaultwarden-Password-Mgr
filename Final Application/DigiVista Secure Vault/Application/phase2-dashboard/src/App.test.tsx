@@ -24,7 +24,7 @@ describe("DigiVista dashboard", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Network Devices" })).toBeInTheDocument();
     expect(screen.getByText("Management IP")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringContaining("type=login"));
-    expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringMatching(/^\/\?dv=action#\/vault/));
+    expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringMatching(/^\/\?dv=action&dvFolder=Network%20Devices#\/vault/));
   });
 
   it("keeps the security and help links on the same trusted origin", () => {

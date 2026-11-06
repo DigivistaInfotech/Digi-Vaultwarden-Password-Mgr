@@ -18,7 +18,7 @@ export function TemplateDialog({ category, onClose }: Props) {
 
   if (!category) return <dialog ref={dialogRef} />;
 
-  const secureUrl = `/?dv=action#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
+  const secureUrl = `/?dv=action&dvFolder=${encodeURIComponent(category.name)}#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
 
   return (
     <dialog ref={dialogRef} className="template-dialog" onClose={onClose}>
@@ -27,7 +27,7 @@ export function TemplateDialog({ category, onClose }: Props) {
         <button aria-label="Close template" onClick={onClose}>×</button>
       </header>
       <div className="template-content">
-        <p>Use the <strong>{category.recordType}</strong> record type and select the matching category folder.</p>
+        <p>Use the <strong>{category.recordType}</strong> record type. The matching <strong>{category.name}</strong> folder will be selected automatically when it exists in your encrypted vault.</p>
         <h3>Recommended information</h3>
         <ul>{category.fields.map(field => <li key={field}>{field}</li>)}</ul>
         <p className="privacy-note"><strong>Privacy:</strong> Information is entered and encrypted in Vaultwarden. This dashboard does not store a second copy.</p>
