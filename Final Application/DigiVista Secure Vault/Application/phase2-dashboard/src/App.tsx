@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CategoryCard } from "./components/CategoryCard";
 import { TemplateDialog } from "./components/TemplateDialog";
 import { countries, experiences, thoughts } from "./data";
@@ -10,6 +10,26 @@ export default function App() {
   const [company, setCompany] = useState("DigiVista Infotech");
   const [thoughtVisible, setThoughtVisible] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [installPrompt, setInstallPrompt] = useState<Event | null>(null);
+
+  useEffect(() => {
+    const captureInstall = (event: Event) => {
+      event.preventDefault();
+      setInstallPrompt(event);
+    };
+    window.addEventListener("beforeinstallprompt", captureInstall);
+    return () => window.removeEventListener("beforeinstallprompt", captureInstall);
+  }, []);
+
+  const installApp = async () => {
+    if (!installPrompt) {
+      window.location.href = "/dashboard/install.html";
+      return;
+    }
+    const promptEvent = installPrompt as Event & { prompt: () => Promise<void> };
+    await promptEvent.prompt();
+    setInstallPrompt(null);
+  };
 
   const experience = experiences[experienceId];
   const country = countries.find(item => item.code === countryCode) ?? countries[0];
@@ -25,6 +45,7 @@ export default function App() {
         <section className="profile-panel"><strong>{experience.label} workspace</strong><span>{company} · {country.name}</span></section>
         <nav aria-label="Primary navigation">
           <a className="active" href="/dashboard/" aria-current="page">My dashboard</a>
+          <button className="nav-button" type="button" onClick={() => void installApp()}>Install mobile app</button>
           <a href="/#/vault">Vault</a>
           <a href="/#/reports">Security health</a>
           <a href="/help">Help & recovery</a>

@@ -1,0 +1,19 @@
+{
+  "name": "DigiVista Secure Vault",
+  "short_name": "DigiVista Vault",
+  "description": "A secure DigiVista workspace for accessing your encrypted Vaultwarden vault.",
+  "id": "/dashboard/",
+  "start_url": "/dashboard/",
+  "scope": "/dashboard/",
+  "display": "standalone",
+  "background_color": "#f3f7fb",
+  "theme_color": "#0b3558",
+  "icons": [
+    { "src": "/dashboard/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/dashboard/DigiVista_Logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Open Vault", "url": "/#/vault" },
+    { "name": "Help & Recovery", "url": "/help" }
+  ]
+}
