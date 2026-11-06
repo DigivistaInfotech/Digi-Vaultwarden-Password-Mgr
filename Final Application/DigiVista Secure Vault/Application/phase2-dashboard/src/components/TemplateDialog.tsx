@@ -18,7 +18,7 @@ export function TemplateDialog({ category, onClose }: Props) {
 
   if (!category) return <dialog ref={dialogRef} />;
 
-  const secureUrl = `/#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
+  const secureUrl = `/?dv=action#/vault?organizationId=unassigned&type=${category.recordType}&action=add`;
 
   return (
     <dialog ref={dialogRef} className="template-dialog" onClose={onClose}>
@@ -34,7 +34,7 @@ export function TemplateDialog({ category, onClose }: Props) {
       </div>
       <footer>
         <button onClick={onClose}>Cancel</button>
-        <a href={secureUrl} target="_blank" rel="noreferrer">Continue in secure vault →</a>
+        <a href={secureUrl}>Continue in secure vault →</a>
       </footer>
     </dialog>
   );

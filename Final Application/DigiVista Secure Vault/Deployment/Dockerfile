@@ -14,6 +14,7 @@ COPY 04_ASSETS/08-30-digivista-phase2-branding.scss /opt/digivista/user.vaultwar
 COPY 04_ASSETS/DigiVista_Logo.png /web-vault/digivista-assets/DigiVista_Logo.png
 COPY 04_ASSETS/08-30-open-source-notices.html /web-vault/open-source-notices/index.html
 COPY 04_ASSETS/11-05-digivista-help.html /web-vault/help/index.html
+COPY 04_ASSETS/11-06-digivista-vault-integration.js /web-vault/digivista-assets/integration.js
 COPY --from=dashboard-builder /build/dashboard/dist/ /web-vault/dashboard/
 COPY 05_REFERENCE/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt /web-vault/licenses/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt
 COPY 02_DEPLOYMENT/10-28-railway-entrypoint.sh /opt/digivista/railway-entrypoint.sh
@@ -23,6 +24,7 @@ RUN chmod 0755 /opt/digivista/railway-entrypoint.sh \
        /web-vault/digivista-assets/DigiVista_Logo.png \
        /web-vault/open-source-notices/index.html \
        /web-vault/help/index.html \
+       /web-vault/digivista-assets/integration.js \
        /web-vault/dashboard/index.html \
        /web-vault/licenses/08-30-Vaultwarden-AGPL-3.0-LICENSE.txt \
     && for manifest in /web-vault/*.json; do \
@@ -38,6 +40,7 @@ RUN chmod 0755 /opt/digivista/railway-entrypoint.sh \
        -e 's#<title page-title>Vaultwarden Web</title>#<title page-title>DigiVista Secure Vault</title>#g' \
        -e 's#<title>Bitwarden Web Vault</title>#<title>DigiVista Secure Vault</title>#g' \
        /web-vault/index.html
+RUN sed -i 's#</body>#<script src="/digivista-assets/integration.js" defer></script></body>#' /web-vault/index.html
 
 ENV DATA_FOLDER=/data \
     SIGNUPS_ALLOWED=false \

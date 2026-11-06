@@ -7,7 +7,7 @@ describe("DigiVista dashboard", () => {
     render(<App />);
     expect(screen.getByText("Network Devices")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Administration" })).toHaveAttribute("href", "/#/organizations");
-    expect(screen.getByRole("link", { name: "Vault" })).toHaveAttribute("href", "/#/vault");
+    expect(screen.getByRole("link", { name: "Secure vault" })).toHaveAttribute("href", "/?dv=stay#/vault");
   });
 
   it("shows only family categories and removes administration", () => {
@@ -24,7 +24,7 @@ describe("DigiVista dashboard", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Network Devices" })).toBeInTheDocument();
     expect(screen.getByText("Management IP")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringContaining("type=login"));
-    expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringMatching(/^\/#\/vault/));
+    expect(screen.getByRole("link", { name: /Continue in secure vault/ })).toHaveAttribute("href", expect.stringMatching(/^\/\?dv=action#\/vault/));
   });
 
   it("keeps the security and help links on the same trusted origin", () => {
