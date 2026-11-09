@@ -3,10 +3,29 @@
 
   const searchParams = new URLSearchParams(window.location.search);
   const mode = searchParams.get("dv");
-  const requestedFolder = searchParams.get("dvFolder");
+  let requestedFolder = searchParams.get("dvFolder");
   let actionWasRequested = window.location.hash.includes("action=add");
   let redirectPending = false;
   let folderApplied = false;
+  let dashboardFrame = null;
+
+  function showDashboard() {
+    if (dashboardFrame?.isConnected) {
+      dashboardFrame.hidden = false;
+      return;
+    }
+
+    dashboardFrame = document.createElement("iframe");
+    dashboardFrame.id = "digivista-dashboard-frame";
+    dashboardFrame.title = "DigiVista Secure Vault dashboard";
+    dashboardFrame.src = "/dashboard/?embedded=1";
+    dashboardFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0;background:#f4f8fc;z-index:2147483000";
+    document.body.appendChild(dashboardFrame);
+  }
+
+  function hideDashboard() {
+    if (dashboardFrame) dashboardFrame.hidden = true;
+  }
 
   function hideStandardChecklist() {
     const dismiss = [...document.querySelectorAll("button, a")].find(element =>
@@ -25,10 +44,11 @@
     }
   }
 
-  function redirectToDashboard(reason) {
+  function redirectToDashboard() {
     if (redirectPending) return;
     redirectPending = true;
-    window.location.replace(`/dashboard/?from=${encodeURIComponent(reason)}`);
+    showDashboard();
+    window.setTimeout(() => { redirectPending = false; }, 250);
   }
 
   function applyRequestedFolder() {
@@ -60,20 +80,33 @@
     applyRequestedFolder();
     const hash = window.location.hash;
 
-    if (hash.includes("action=add")) actionWasRequested = true;
+    if (hash.includes("action=add")) {
+      actionWasRequested = true;
+      hideDashboard();
+    }
     if (mode === "stay") return;
 
     if (mode === "action") {
       if (actionWasRequested && /^#\/vault\/?(?:\?.*)?$/.test(hash) && !hash.includes("action=add")) {
-        redirectToDashboard("credential-complete");
+        redirectToDashboard();
       }
       return;
     }
 
     if (/^#\/vault\/?$/.test(hash)) {
-      window.setTimeout(() => redirectToDashboard("login-complete"), 350);
+      window.setTimeout(() => redirectToDashboard(), 350);
     }
   }
+
+  window.addEventListener("message", event => {
+    if (event.origin !== window.location.origin || event.data?.type !== "digivista-open-secure-route") return;
+    const target = new URL(event.data.url, window.location.origin);
+    requestedFolder = typeof event.data.folderName === "string" ? event.data.folderName : null;
+    folderApplied = false;
+    actionWasRequested = target.hash.includes("action=add");
+    hideDashboard();
+    window.location.hash = target.hash;
+  });
 
   window.addEventListener("hashchange", syncJourney);
   const observer = new MutationObserver(syncJourney);

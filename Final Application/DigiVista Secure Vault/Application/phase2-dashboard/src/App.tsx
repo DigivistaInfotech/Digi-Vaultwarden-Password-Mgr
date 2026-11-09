@@ -38,6 +38,14 @@ export default function App() {
     return list[Math.floor(Date.now() / 86_400_000) % list.length];
   }, [experienceId]);
 
+  const openSecureRoute = (url: string, folderName?: string) => {
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: "digivista-open-secure-route", url, folderName }, window.location.origin);
+      return;
+    }
+    window.location.href = url;
+  };
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -46,7 +54,7 @@ export default function App() {
         <nav aria-label="Primary navigation">
           <a className="active" href="/dashboard/" aria-current="page">My dashboard</a>
           <button className="nav-button" type="button" onClick={() => void installApp()}>Install mobile app</button>
-          <a href="/?dv=stay#/vault">Secure vault</a>
+          <a href="/?dv=stay#/vault" onClick={event => { if (window.parent !== window) { event.preventDefault(); openSecureRoute("/#/vault"); } }}>Secure vault</a>
           <a href="/#/reports">Security health</a>
           <a href="/help">Help & recovery</a>
           <a href="/dashboard/trust.html">Trust & policies</a>
@@ -66,10 +74,10 @@ export default function App() {
         </section>
         {thoughtVisible && <section className="daily-thought"><div><strong>Thought for today</strong> · {dailyThought}</div><button aria-label="Hide thought for today" onClick={() => setThoughtVisible(false)}>Hide</button></section>}
         <section className="summary-grid"><article className="hero"><small>Your secure workspace</small><h2>{experience.heroTitle}</h2><p>{experience.heroText}</p></article><article className="readiness"><h2>Security readiness</h2><p>● Master password protected</p><p>● Recovery kit acknowledged</p><p>● Two-step login enabled</p></article></section>
-        <section className="category-section"><header><div><h2>What would you like to manage?</h2><p>Choose a clearly labelled area. You can change this view at any time.</p></div><button onClick={() => { window.location.href = "/?dv=action#/vault?organizationId=unassigned&type=login&action=add"; }}>+ Save a credential</button></header><div className="category-grid">{experience.categories.map(category => <CategoryCard key={category.name} category={category} onOpen={setSelectedCategory} />)}</div></section>
+        <section className="category-section"><header><div><h2>What would you like to manage?</h2><p>Choose a clearly labelled area. You can change this view at any time.</p></div><button onClick={() => openSecureRoute("/#/vault?organizationId=unassigned&type=login&action=add")}>+ Save a credential</button></header><div className="category-grid">{experience.categories.map(category => <CategoryCard key={category.name} category={category} onOpen={setSelectedCategory} />)}</div></section>
         <footer className="page-footer"><span>DigiVista Secure Vault · Customer-controlled encrypted data</span><span>Powered by Vaultwarden · Open-source notices</span></footer>
       </main>
-      <TemplateDialog category={selectedCategory} onClose={() => setSelectedCategory(null)} />
+      <TemplateDialog category={selectedCategory} onClose={() => setSelectedCategory(null)} onOpenSecureRoute={openSecureRoute} />
     </div>
   );
 }

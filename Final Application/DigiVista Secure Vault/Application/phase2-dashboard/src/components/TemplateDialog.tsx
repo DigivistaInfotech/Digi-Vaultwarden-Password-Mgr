@@ -4,9 +4,10 @@ import type { Category } from "../types";
 interface Props {
   category: Category | null;
   onClose: () => void;
+  onOpenSecureRoute: (url: string, folderName?: string) => void;
 }
 
-export function TemplateDialog({ category, onClose }: Props) {
+export function TemplateDialog({ category, onClose, onOpenSecureRoute }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -34,7 +35,11 @@ export function TemplateDialog({ category, onClose }: Props) {
       </div>
       <footer>
         <button onClick={onClose}>Cancel</button>
-        <a href={secureUrl}>Continue in secure vault →</a>
+        <a href={secureUrl} onClick={event => {
+          if (window.parent === window) return;
+          event.preventDefault();
+          onOpenSecureRoute(`/#/vault?organizationId=unassigned&type=${category.recordType}&action=add`, category.name);
+        }}>Continue in secure vault →</a>
       </footer>
     </dialog>
   );
