@@ -33,10 +33,9 @@
     }, 800);
   }
 
-  function showDashboard() {
+  function prepareDashboard() {
     if (dashboardFrame?.isConnected) {
-      dashboardFrame.hidden = false;
-      return;
+      return dashboardFrame;
     }
 
     dashboardFrame = document.createElement("iframe");
@@ -44,7 +43,13 @@
     dashboardFrame.title = "DigiVista Secure Vault dashboard";
     dashboardFrame.src = "/dashboard/?embedded=1";
     dashboardFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0;background:#f4f8fc;z-index:2147483000";
+    dashboardFrame.hidden = true;
     document.body.appendChild(dashboardFrame);
+    return dashboardFrame;
+  }
+
+  function showDashboard() {
+    prepareDashboard().hidden = false;
   }
 
   function hideDashboard() {
@@ -136,7 +141,7 @@
         window.location.hash = pendingRoute;
         return;
       }
-      window.setTimeout(() => redirectToDashboard(), 350);
+      redirectToDashboard();
     }
   }
 
@@ -154,6 +159,7 @@
   window.addEventListener("hashchange", syncJourney);
   const observer = new MutationObserver(syncJourney);
   observer.observe(document.documentElement, { childList: true, subtree: true });
+  prepareDashboard();
   window.setTimeout(syncJourney, 250);
   window.setTimeout(() => observer.disconnect(), 120000);
 })();
