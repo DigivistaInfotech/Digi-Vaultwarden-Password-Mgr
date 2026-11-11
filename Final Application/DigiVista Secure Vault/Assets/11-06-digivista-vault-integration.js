@@ -3,11 +3,35 @@
 
   const searchParams = new URLSearchParams(window.location.search);
   const mode = searchParams.get("dv");
+  const pendingRouteKey = "digivista-pending-secure-route";
   let requestedFolder = searchParams.get("dvFolder");
   let actionWasRequested = window.location.hash.includes("action=add");
   let redirectPending = false;
   let folderApplied = false;
   let dashboardFrame = null;
+  let pendingClearTimer = null;
+
+  function getPendingSecureRoute() {
+    const value = window.sessionStorage.getItem(pendingRouteKey);
+    return value?.startsWith("#/vault") && value.includes("action=add") ? value : null;
+  }
+
+  function rememberPendingSecureRoute(hash) {
+    if (hash?.startsWith("#/vault") && hash.includes("action=add")) {
+      window.sessionStorage.setItem(pendingRouteKey, hash);
+    }
+  }
+
+  function clearPendingRouteWhenFormIsReady() {
+    window.clearTimeout(pendingClearTimer);
+    pendingClearTimer = window.setTimeout(() => {
+      if (!window.location.hash.includes("action=add")) return;
+      const hasFormAction = [...document.querySelectorAll("button")].some(button =>
+        /^(save|cancel)$/i.test(button.textContent?.trim() ?? "")
+      );
+      if (hasFormAction) window.sessionStorage.removeItem(pendingRouteKey);
+    }, 800);
+  }
 
   function showDashboard() {
     if (dashboardFrame?.isConnected) {
@@ -80,9 +104,21 @@
     applyRequestedFolder();
     const hash = window.location.hash;
 
+    // Vaultwarden shows its browser-extension onboarding route after a user's
+    // first successful sign-in/unlock. DigiVista has its own guided dashboard,
+    // so keep the Vaultwarden SPA (and its unlocked encryption key) alive while
+    // skipping only this optional onboarding screen.
+    if (/^#\/setup-extension\/?(?:\?.*)?$/.test(hash)) {
+      hideDashboard();
+      const destination = getPendingSecureRoute() ?? "#/vault";
+      window.location.replace(`${window.location.pathname}${window.location.search}${destination}`);
+      return;
+    }
+
     if (hash.includes("action=add")) {
       actionWasRequested = true;
       hideDashboard();
+      clearPendingRouteWhenFormIsReady();
     }
     if (mode === "stay") return;
 
@@ -94,6 +130,12 @@
     }
 
     if (/^#\/vault\/?$/.test(hash)) {
+      const pendingRoute = getPendingSecureRoute();
+      if (pendingRoute) {
+        hideDashboard();
+        window.location.hash = pendingRoute;
+        return;
+      }
       window.setTimeout(() => redirectToDashboard(), 350);
     }
   }
@@ -104,6 +146,7 @@
     requestedFolder = typeof event.data.folderName === "string" ? event.data.folderName : null;
     folderApplied = false;
     actionWasRequested = target.hash.includes("action=add");
+    rememberPendingSecureRoute(target.hash);
     hideDashboard();
     window.location.hash = target.hash;
   });
