@@ -128,7 +128,7 @@
     if (mode === "stay") return;
 
     if (mode === "action") {
-      if (actionWasRequested && /^#\/vault\/?(?:\?.*)?$/.test(hash) && !hash.includes("action=add")) {
+      if (/^#\/vault\/?(?:\?.*)?$/.test(hash) && !hash.includes("action=add")) {
         redirectToDashboard();
       }
       return;
