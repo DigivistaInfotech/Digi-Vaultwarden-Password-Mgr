@@ -146,7 +146,19 @@
   }
 
   window.addEventListener("message", event => {
-    if (event.origin !== window.location.origin || event.data?.type !== "digivista-open-secure-route") return;
+    if (event.origin !== window.location.origin) return;
+
+    if (event.data?.type === "digivista-user-active") {
+      // Activity inside the same-origin dashboard iframe does not naturally
+      // bubble into Vaultwarden's parent document. Relay only real dashboard
+      // interaction so Vaultwarden's normal inactivity timeout remains
+      // accurate instead of locking an actively working user.
+      window.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+      document.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+      return;
+    }
+
+    if (event.data?.type !== "digivista-open-secure-route") return;
     const target = new URL(event.data.url, window.location.origin);
     requestedFolder = typeof event.data.folderName === "string" ? event.data.folderName : null;
     folderApplied = false;

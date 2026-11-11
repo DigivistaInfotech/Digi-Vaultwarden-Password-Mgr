@@ -21,6 +21,22 @@ export default function App() {
     return () => window.removeEventListener("beforeinstallprompt", captureInstall);
   }, []);
 
+  useEffect(() => {
+    if (window.parent === window) return;
+
+    let lastActivitySent = 0;
+    const relayActivity = () => {
+      const now = Date.now();
+      if (now - lastActivitySent < 1_000) return;
+      lastActivitySent = now;
+      window.parent.postMessage({ type: "digivista-user-active" }, window.location.origin);
+    };
+
+    const activityEvents: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "touchstart", "wheel"];
+    activityEvents.forEach(eventName => window.addEventListener(eventName, relayActivity, { passive: true }));
+    return () => activityEvents.forEach(eventName => window.removeEventListener(eventName, relayActivity));
+  }, []);
+
   const installApp = async () => {
     if (!installPrompt) {
       window.location.href = "/dashboard/install.html";
